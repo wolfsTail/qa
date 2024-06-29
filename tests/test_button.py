@@ -9,7 +9,7 @@ def test_is_button_exists_simple(browser):
 
 def test_is_button_exists_like_a_button(browser):
     browser.get(TEST_URL_2)
-    assert browser.find_element(By.ID, 'submit-id-submit').is_displayed()
+    assert browser.find_element(By.ID, 'button-form').is_displayed()
 
 def test_is_button_disabled(browser):
     browser.get(TEST_URL_3)
