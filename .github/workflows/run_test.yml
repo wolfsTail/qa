@@ -1,6 +1,16 @@
 name: Auto tests
 
-on: push
+on: 
+    workflow_dispatch:
+        inputs:
+            deployment_target:
+                description: Change target for run
+                required: true
+                default: 
+                type: choice
+                options:
+                    - first
+                    - second
 
 jobs: 
     test:
@@ -17,5 +27,9 @@ jobs:
               run: sudo apt-get install google-chrome-stable
             - name: Install dependencies
               run: pip install -r requirments.txt
-            - name: Run tests
-              run: pytest
+            - name: first
+              if: "github.event.inputs.deployment_target == 'first'"
+              run: pytest -s -v tests/test_button.py::test_is_button_exists_simple
+            - name: second
+              if: "github.event.inputs.deployment_target == 'second'"
+              run: pytest -s -v tests/test_button.py::test_is_button_exists_like_a_button
