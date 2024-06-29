@@ -11,6 +11,7 @@ on:
                 options:
                     - first
                     - second
+                    - all
 
 jobs: 
     test:
@@ -33,3 +34,6 @@ jobs:
             - name: second
               if: "github.event.inputs.deployment_target == 'second'"
               run: pytest -s -v tests/test_button.py::test_is_button_exists_like_a_button
+            - name: all
+              if: "github.event.inputs.deployment_target == 'all'"
+              run: pytest -s -v tests/*
